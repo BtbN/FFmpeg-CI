@@ -9,14 +9,15 @@ runner:
   shutdown_timeout: 1h
   insecure: false
   fetch_timeout: 5s
-  labels: ["linux-amd64:docker://ghcr.io/btbn/ffmpeg-builds/base-linux64:latest"]
+  labels: ["linux-amd64:docker://ghcr.io/btbn/ffmpeg-builds/base-linux64:latest", "utilities:docker://ghcr.io/btbn/ffmpeg-builds/base-linux64:latest"]
 
 cache:
   enabled: true
   dir: actcache
+  actions_cache_url_override: "http://cacheproxy:8080"
 
 container:
-  network: ""
+  network: "runnernet"
   enable_ipv6: false
   privileged: false
   options:

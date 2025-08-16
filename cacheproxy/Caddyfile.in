@@ -1,0 +1,20 @@
+{
+    http_port 8080
+}
+
+cacheproxy {
+    log {
+        output stderr
+        format console
+    }
+
+    rewrite * @@@REV_TARGET_PATH@@@{uri}
+    reverse_proxy * @@@REV_TARGET_BASE@@@ {
+        header_up Authorization "Bearer @@@BEARER_TOKEN@@@"
+
+        header_up Host {upstream_hostport}
+        header_up -X-Forwarded-For
+        header_up -X-Forwarded-Proto
+        header_up -X-Forwarded-Host
+    }
+}
