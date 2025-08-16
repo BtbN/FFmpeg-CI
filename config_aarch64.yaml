@@ -4,19 +4,20 @@ log:
 
 runner:
   file: .runner
+  env_file: .env
   capacity: 1
   timeout: 3h
   shutdown_timeout: 1h
   insecure: false
   fetch_timeout: 5s
-  labels: ["linux-aarch64:docker://ghcr.io/btbn/ffmpeg-builds/base:latest-arm"]
+  labels: ["linux-aarch64:docker://ghcr.io/btbn/ffmpeg-builds/base:latest-arm", "utilities:docker://ghcr.io/btbn/ffmpeg-builds/base:latest-arm"]
 
 cache:
   enabled: true
   dir: actcache
 
 container:
-  network: ""
+  network: "runnernet"
   enable_ipv6: false
   privileged: false
   options:
